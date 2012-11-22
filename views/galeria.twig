@@ -1,0 +1,16 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<h1>{{ galeria.titulo }}</h1>
+<ul>
+    {% for foto in galeria.fotos %}
+        <li>
+            <a href="{{ foto.url }}largura:900">
+                <img src="{{ foto.url }}largura:300" title="{{ foto.titulo }}" />
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

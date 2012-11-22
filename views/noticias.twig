@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<ul>
+{% for noticia in noticias %}
+    <li><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

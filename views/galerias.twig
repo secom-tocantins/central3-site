@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<h1>Galerias</h1>
+
+{% if galerias %}
+<ul>
+    {% for galeria in galerias %}
+        <li><a href="{{ app.request.baseUrl ~ galeria.uri }}">{{ galeria.titulo }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>Nenhuma galeria cadastrada.</p>
+{% endif %}
+
+{% endblock %}

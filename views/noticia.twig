@@ -1,0 +1,10 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<article>
+<h1>{{ noticia.titulo|e }}</h1>
+{{ noticia.conteudo|raw }}
+</article>
+
+{% endblock %}

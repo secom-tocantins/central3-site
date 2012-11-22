@@ -9,6 +9,8 @@
         }
     ],
     "require": {
+        "secom-tocantins/cache": "dev-master",
+        "secom-tocantins/central3-client-php": "dev-master",
         "silex/silex": "1.0.*",
         "twig/twig": ">=1.8,<2.0-dev",
         "symfony/twig-bridge": "2.1.*"
