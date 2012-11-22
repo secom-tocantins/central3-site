@@ -1,0 +1,15 @@
+{
+    "packages": {
+        "name": "secom-tocantins/central3-silex-client",
+        "version": "1.0.0",
+        "dist": {
+            "url": "https://github.com/secom-tocantins/central3-silex-client/zipball/master",
+            "type": "zip"
+        },
+        "source": {
+            "url": "https://github.com/secom-tocantins/central3-silex-client",
+            "type": "git",
+            "reference": ""
+        }
+    }
+}
