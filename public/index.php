@@ -4,23 +4,23 @@ Symfony\Component\HttpFoundation\Request::trustProxyData();
 
 /* Silex */
 $app = new Silex\Application();
-$app['debug'] = true;
+$app['debug'] = (getenv('APPLICATION_ENV') == 'development');
 
 /* Twig */
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => dirname(__DIR__).'/views'));
 
 /* Central3 */
-$app['client'] = $app->share(function() use ($app) {
+$app['cache'] = $app->share(function() use ($app) {
     if ($app['debug']) {
-        $cache = null;
+        return null;    
     }
-    else {
-        $mc = new \Memcached();
-        $mc->addServer('localhost', 11211);
-        $cache = new \Secom\Cache\Memcached($mc);
-    }
-    
-    return new \Secom\Central3\Client('teste', $cache);
+    $mc = new \Memcached();
+    $mc->addServer('localhost', 11211);
+    return new \Secom\Cache\Memcached($mc);
+});
+
+$app['client'] = $app->share(function() use ($app) {
+    return new \Secom\Central3\Client('teste', $app['cache']);
 });
 
 /* Menu comum */
