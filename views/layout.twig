@@ -9,6 +9,9 @@
                 <li><a href="{{ app.request.baseUrl }}">Inicio</a></li>
                 <li><a href="{{ app.request.baseUrl }}/noticia">Noticias</a></li>
                 <li><a href="{{ app.request.baseUrl }}/galeria">Galerias</a></li>
+                {% for item in menu %}
+                    <li><a href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a></li>
+                {% endfor %}
             </ul>
         </nav>
         {% block content %}
