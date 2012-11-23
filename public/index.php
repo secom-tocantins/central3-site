@@ -2,35 +2,50 @@
 require_once __DIR__.'/../vendor/autoload.php';
 Symfony\Component\HttpFoundation\Request::trustProxyData();
 
-/* Central3 */
-$mc = new \Memcached();
-$mc->addServer('localhost', 11211);
-$cache = new \Secom\Cache\Memcached($mc);
-$client = new \Secom\Central3\Client('teste', $cache);
-
 /* Silex */
 $app = new Silex\Application();
 $app['debug'] = true;
 
 /* Twig */
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => dirname(__DIR__).'/views'));
-$twig = $app['twig'];
+
+/* Central3 */
+$app['client'] = $app->share(function() use ($app) {
+    if ($app['debug']) {
+        $cache = null;
+    }
+    else {
+        $mc = new \Memcached();
+        $mc->addServer('localhost', 11211);
+        $cache = new \Secom\Cache\Memcached($mc);
+    }
+    
+    return new \Secom\Central3\Client('teste', $cache);
+});
+
+/* Menu comum */
+$app->before(function() use ($app) {
+    $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
+});
 
 /*
 * App
 */
 
-$menu = $client->query('pagina.listar');
-
 /* Home */
-$app->get('/', function () use ($twig, $menu) {
-    return $twig->render('index.twig', array('menu'=>$menu));
+$app->get('/', function (Silex\Application $app) {
+    return $app['twig']->render('index.twig');
 });
 
 /* Listar notícias */
-$listar = function () use ($twig, $menu, $client, $app) {
-    $noticias = $client->byUri($app['request']->getPathInfo());
-    return $twig->render('noticias.twig', array('menu'=>$menu, 'noticias' => $noticias));
+$listar = function (Silex\Application $app){
+    try {
+        $noticias = $app['client']->byUri($app['request']->getPathInfo());
+        return $app['twig']->render('noticias.twig', array('noticias' => $noticias));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
 };
 $app->get('/noticia/', $listar);
 $app->get('/noticia/{ano}/', $listar);
@@ -38,27 +53,51 @@ $app->get('/noticia/{ano}/{mes}/', $listar);
 $app->get('/noticia/{ano}/{mes}/{dia}/', $listar);
 
 /* Visualizar notícia */
-$app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function () use ($twig, $menu, $client, $app) {
-    $noticia = $client->byUri($app['request']->getPathInfo());
-    return $twig->render('noticia.twig', array('menu'=>$menu, 'noticia' => $noticia));
+$app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app) {
+    try {
+        $noticia = $app['client']->byUri($app['request']->getPathInfo());
+        return $app['twig']->render('noticia.twig', array('noticia' => $noticia));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
 });
 
 /* Listar galerias */
-$app->get('/galeria/', function () use ($twig, $menu, $client, $app) {
-    $galerias = $client->byUri($app['request']->getPathInfo());
-    return $twig->render('galerias.twig', array('menu'=>$menu, 'galerias' => $galerias));
+$app->get('/galeria/', function (Silex\Application $app) {
+    try {
+        $galerias = $app['client']->byUri($app['request']->getPathInfo());
+        return $app['twig']->render('galerias.twig', array('galerias' => $galerias));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
 });
 
 /* Visualizar galeria */
-$app->get('/galeria/{slug}/', function () use ($twig, $menu, $client, $app) {
-    $galeria = $client->byUri($app['request']->getPathInfo());
-    return $twig->render('galeria.twig', array('menu'=>$menu, 'galeria' => $galeria));
+$app->get('/galeria/{slug}/', function (Silex\Application $app) {
+    try {
+        $galeria = $app['client']->byUri($app['request']->getPathInfo());
+        return $app['twig']->render('galeria.twig', array('galeria' => $galeria));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
 });
 
 /* Visualizar página */
-$app->get('/{slug}/', function () use ($twig, $menu, $client, $app) {
-    $pagina = $client->byUri($app['request']->getPathInfo());
-    return $twig->render('pagina.twig', array('menu'=>$menu, 'pagina' => $pagina));
+$app->get('/{slug}/', function (Silex\Application $app) {
+    try {
+        $pagina = $app['client']->byUri($app['request']->getPathInfo());
+        return $app['twig']->render('pagina.twig', array('pagina' => $pagina));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
+});
+
+$app->error(function (\Exception $e, $code) use ($app) {
+    return $app['twig']->render('error.twig', array('menu'=>$app['menu'], 'exception' => $e, 'code'=>$code));
 });
 
 $app->run();
