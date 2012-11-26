@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Erro</title>
+        <style>
+            html, body { margin:0; padding:0; }
+            #wrapper { padding: 20px; }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
+        <div id="wrapper">
+            <h1>Erro</h1>
+            <p>Se você está vendo esta página, alguma coisa saiu muito errada.</p>
+            <!--p>{{ exception.message }}</p-->
+            <a href="{{ app.request.baseUrl }}">Voltar</a>
+        </div>
+        <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>
+    </body>
+</html>

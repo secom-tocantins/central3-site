@@ -25,7 +25,12 @@ $app['client'] = $app->share(function() use ($app) {
 
 /* Menu comum */
 $app->before(function() use ($app) {
-    $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
+    try {
+        $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
+    }
+    catch(\Exception $e) {
+        $app->abort(404, $e->getMessage());
+    }
 });
 
 /*
@@ -97,7 +102,12 @@ $app->get('/{slug}/', function (Silex\Application $app) {
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {
-    return $app['twig']->render('error.twig', array('menu'=>$app['menu'], 'exception' => $e, 'code'=>$code));
+    try {
+        return $app['twig']->render('error.twig', array('menu'=>$app['menu'], 'exception' => $e, 'code'=>$code));
+    }
+    catch(\Exception $e) {
+        return $app['twig']->render('panic.twig', array('exception'=>$e, 'code'=>$code));
+    }
 });
 
 $app->run();
