@@ -3,6 +3,10 @@
 {% block content %}
 
 <h1>Erro</h1>
-{{ exception.message }}
+<p>{{ exception.message }}</p>
+
+{% if app.debug %}
+<pre>{{ exception.getTraceAsString }}</pre>
+{% endif %}
 
 {% endblock %}

@@ -11,7 +11,12 @@
         <div id="wrapper">
             <h1>Erro</h1>
             <p>Se você está vendo esta página, alguma coisa saiu muito errada.</p>
-            <!--p>{{ exception.message }}</p-->
+            
+            {% if app.debug %}
+            <p>{{ exception.message }}</p>
+            <pre>{{ exception.getTraceAsString }}</pre>
+            {% endif %}
+            
             <a href="{{ app.request.baseUrl }}">Voltar</a>
         </div>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>
