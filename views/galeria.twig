@@ -6,8 +6,8 @@
 <ul>
     {% for foto in galeria.fotos %}
         <li>
-            <a href="{{ foto.url }}largura:900">
-                <img src="{{ foto.url }}largura:300" title="{{ foto.titulo }}" />
+            <a class="modal" rel="group" href="{{ foto.url|resize(1000) }}">
+                {{ foto.code|resize(300)|raw }}
             </a>
         </li>
     {% endfor %}

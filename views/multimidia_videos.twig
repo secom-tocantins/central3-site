@@ -1,0 +1,10 @@
+{% if (pagina.multimidia.videos) %}
+<ul id="videos">
+{% for video in pagina.multimidia.videos %}
+    <li>
+        {{ video.code|resize(300, true)|raw }}
+        {{ video.titulo }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

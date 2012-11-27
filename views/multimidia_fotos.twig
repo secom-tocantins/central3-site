@@ -1,0 +1,11 @@
+{% if (pagina.multimidia.fotos) %}
+<ul id="fotos">
+{% for foto in pagina.multimidia.fotos %}
+    <li>
+        <a class="modal" rel="group" href="{{ foto.url|resize(1000) }}">
+            {{ foto.code|resize(300)|raw }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

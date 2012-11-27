@@ -1,0 +1,7 @@
+{% if (pagina.multimidia.links) %}
+<ul id="links">
+{% for filho in pagina.multimidia.links %}
+    <li><a href="{{ filho.url }}">{{filho.titulo}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}

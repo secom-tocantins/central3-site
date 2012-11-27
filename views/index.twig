@@ -1,5 +1,23 @@
 {% extends 'layout.twig' %}
 
 {% block content %}
-Home
+
+<ul>
+{% for noticia in destaques %}
+    <li>
+        {{ noticia.thumb.code|resize(200)|raw }}
+        <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
+        <p>{{ noticia.sinopse }}</p>
+    </li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for noticia in noticias %}
+    <li>
+        <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
+    </li>
+{% endfor %}
+</ul>
+
 {% endblock %}

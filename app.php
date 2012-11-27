@@ -7,14 +7,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
     Secom\Central3\Client\Exception\CommunicationException,
     \Exception;
 
-/* Menu comum */
+/* Itens comuns */
 $app->before(function() use ($app) {
+    $app['twig']->addGlobal('site', $app['client']->query('site.info')[0]);
     $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
 });
 
 /* Home */
 $app->get('/', function (Silex\Application $app) {
-    return $app['twig']->render('index.twig');
+    $vars = array();
+    $vars['destaques'] = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=3');
+    $vars['noticias'] = $app['client']->query('noticia.listar','limite=10');
+    return $app['twig']->render('index.twig', $vars);
 });
 
 /* Listar notícias */
@@ -33,8 +37,7 @@ $app->get('/noticia/{ano}/{mes}/{dia}/', $listar);
 
 /* Visualizar notícia */
 $app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app) {
-    try
-    {
+    try {
         $noticia = $app['client']->byUri($app['request']->getPathInfo());
         return $app['twig']->render('noticia.twig', array('noticia' => $noticia));
     } catch(ApiException $e) {
@@ -72,6 +75,7 @@ $app->get('/{slug}/', function (Silex\Application $app) {
     }
 });
 
+/* Tratando erros */
 $app->error(function (\Exception $e) use ($app) {
     if ($e instanceof NotFoundHttpException) {
         if (isset($app['twig']->getGlobals()['menu'])) {

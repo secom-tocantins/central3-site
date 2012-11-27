@@ -1,0 +1,8 @@
+{% if (pagina.multimidia.arquivos) %}
+<ul id="links">
+{% for arquivo in pagina.multimidia.arquivos %}
+    <li><a href="{{ arquivo.url }}">{{arquivo.titulo}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+

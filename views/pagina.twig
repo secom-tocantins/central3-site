@@ -2,7 +2,24 @@
 
 {% block content %}
 
-<h1>{{ pagina.titulo }}</h1>
+<article>
+
+<h1>{{ pagina.titulo|e }}</h1>
+
+<div id="multimidia">
+{% include "multimidia_fotos.twig" with { 'pagina':pagina } %}
+{% include "multimidia_videos.twig" with { 'pagina':pagina } %}
+{% include "multimidia_audios.twig" with { 'pagina':pagina } %}
+</div>
+
+<div id="conteudo">
 {{ pagina.conteudo|raw }}
+</div>
+
+{% include "multimidia_arquivos.twig" with { 'pagina':pagina } %}
+{% include "multimidia_links.twig" with { 'pagina':pagina } %}
+{% include "multimidia_filhos.twig" with { 'pagina':pagina } %}
+
+</article>
 
 {% endblock %}
