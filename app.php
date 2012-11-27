@@ -79,10 +79,10 @@ $app->get('/{slug}/', function (Silex\Application $app) {
 $app->error(function (\Exception $e) use ($app) {
     if ($e instanceof NotFoundHttpException) {
         if (isset($app['twig']->getGlobals()['menu'])) {
-            return $app['twig']->render('error.twig', array('exception'=>$e));
+            return $app['twig']->render('error/error.twig', array('exception'=>$e));
         }
     }
-    return $app['twig']->render('panic.twig', array('exception'=>$e));
+    return $app['twig']->render('error/panic.twig', array('exception'=>$e));
 });
 
 return $app;

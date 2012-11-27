@@ -7,16 +7,16 @@
 <h1>{{ noticia.titulo|e }}</h1>
 
 <div id="multimidia">
-{% include "multimidia_fotos.twig" with { 'pagina':noticia } %}
-{% include "multimidia_videos.twig" with { 'pagina':noticia } %}
-{% include "multimidia_audios.twig" with { 'pagina':noticia } %}
+{% include "multimidia/fotos.twig" with { 'pagina':noticia } %}
+{% include "multimidia/videos.twig" with { 'pagina':noticia } %}
+{% include "multimidia/audios.twig" with { 'pagina':noticia } %}
 </div>
 
 <div id="conteudo">
 {{ noticia.conteudo|raw }}
 </div>
 
-{% include "multimidia_arquivos.twig" with { 'pagina':noticia } %}
+{% include "multimidia/arquivos.twig" with { 'pagina':noticia } %}
 
 </article>
 

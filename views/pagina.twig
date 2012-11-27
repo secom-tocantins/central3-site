@@ -7,18 +7,18 @@
 <h1>{{ pagina.titulo|e }}</h1>
 
 <div id="multimidia">
-{% include "multimidia_fotos.twig" with { 'pagina':pagina } %}
-{% include "multimidia_videos.twig" with { 'pagina':pagina } %}
-{% include "multimidia_audios.twig" with { 'pagina':pagina } %}
+{% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/videos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/audios.twig" with { 'pagina':pagina } %}
 </div>
 
 <div id="conteudo">
 {{ pagina.conteudo|raw }}
 </div>
 
-{% include "multimidia_arquivos.twig" with { 'pagina':pagina } %}
-{% include "multimidia_links.twig" with { 'pagina':pagina } %}
-{% include "multimidia_filhos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/links.twig" with { 'pagina':pagina } %}
+{% include "multimidia/filhos.twig" with { 'pagina':pagina } %}
 
 </article>
 
