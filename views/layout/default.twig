@@ -18,8 +18,16 @@
                 <a href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
                 {% endfor %}
             </nav>
+            <div id="content" class="{{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
             {% block content %}
             {% endblock %}
+            </div>
+            <sidebar>
+                <script src="http://publicidade.to.gov.br/pub.php" type="text/javascript"></script>
+                {% for banner in banners %}
+                {{ banner.code|raw }}
+                {% endfor %}
+            </sidebar>
         </div>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>
     </body>

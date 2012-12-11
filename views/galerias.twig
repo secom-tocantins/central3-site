@@ -5,11 +5,9 @@
 <h1>Galerias</h1>
 
 {% if galerias %}
-<ul>
     {% for galeria in galerias %}
-        <li><a href="{{ app.request.baseUrl ~ galeria.uri }}">{{ galeria.titulo }}</a></li>
+        <div><a href="{{ app.request.baseUrl ~ galeria.uri }}">{{ galeria.titulo }}</a></div>
     {% endfor %}
-</ul>
 {% else %}
     <p>Nenhuma galeria cadastrada.</p>
 {% endif %}

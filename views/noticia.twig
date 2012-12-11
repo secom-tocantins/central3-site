@@ -4,19 +4,23 @@
 
 <article>
 
-<h1>{{ noticia.titulo|e }}</h1>
+<h1>{{ pagina.titulo|e }}</h1>
 
+{% if pagina.multimidia.fotos or pagina.multimidia.videos or pagina.multimidia.audios %}
 <div id="multimidia">
-{% include "multimidia/fotos.twig" with { 'pagina':noticia } %}
-{% include "multimidia/videos.twig" with { 'pagina':noticia } %}
-{% include "multimidia/audios.twig" with { 'pagina':noticia } %}
+{% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/videos.twig" with { 'pagina':pagina } %}
+{% include "multimidia/audios.twig" with { 'pagina':pagina } %}
 </div>
+{% endif %}
 
 <div id="conteudo">
-{{ noticia.conteudo|raw }}
+{{ pagina.conteudo|raw }}
 </div>
 
-{% include "multimidia/arquivos.twig" with { 'pagina':noticia } %}
+<div id="attachment">
+{% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+</div>
 
 </article>
 

@@ -3,14 +3,10 @@
 {% block content %}
 
 <h1>{{ galeria.titulo }}</h1>
-<ul>
-    {% for foto in galeria.fotos %}
-        <li>
-            <a class="modal" rel="group" href="{{ foto.url|resize(1000) }}">
-                {{ foto.code|resize(300)|raw }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+{% for foto in galeria.fotos %}
+    <a title="{{ foto.legenda }}" class="modal" rel="group" href="{{ foto.url|resize(1000) }}">
+        {{ foto.code|resize(190)|raw }}
+    </a>
+{% endfor %}
 
 {% endblock %}
