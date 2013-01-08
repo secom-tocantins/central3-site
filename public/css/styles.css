@@ -46,6 +46,9 @@ a.button { background: #62AC39; padding: 5px; color: white; margin-top:10px; dis
 #content.noticia article #attachment ul,
 #content.pagina article #attachment ul { display: table; margin-left:20px; }
 
+#content.noticia article #attachment ul li,
+#content.pagina article #attachment ul li { line-height: 20px; }
+
 /* Galerias */
 
 #content.galerias { }

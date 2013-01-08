@@ -1,8 +1,8 @@
 {% if (pagina.multimidia.links) %}
 <h2>Link(s)</h2>
 <ul id="links">
-{% for filho in pagina.multimidia.links %}
-    <li><a href="{{ filho.url }}">{{filho.titulo}}</a></li>
+{% for link in pagina.multimidia.links %}
+    <li>{{ link.code|raw }}</li>
 {% endfor %}
 </ul>
 {% endif %}
