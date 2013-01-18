@@ -77,7 +77,7 @@ $app->get('/{slug}/', function (Silex\Application $app) {
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
     }
-})->bind('pagina');
+})->assert('slug','[a-z0-9\-/]+')->bind('pagina');
 
 /* Tratando erros */
 $app->error(function (\Exception $e) use ($app) {
