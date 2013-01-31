@@ -2,7 +2,7 @@
 <ul id="fotos">
 {% for foto in pagina.multimidia.fotos %}
     <li>
-        <a class="modal" rel="group" href="{{ foto.url|resize(1000) }}">
+        <a class="modal" rel="group" href="{{ foto.url|resize(1000) }}" title="{{ foto.legenda }} - {{ foto.autor }}">
             {{ foto.code|resize(300)|raw }}
         </a>
     </li>

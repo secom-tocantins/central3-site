@@ -6,6 +6,8 @@
 
 <h1>{{ pagina.titulo|e }}</h1>
 
+<p>{{ pagina.data }} - {{ pagina.autor }}</p>
+
 {% if pagina.multimidia.fotos or pagina.multimidia.videos or pagina.multimidia.audios %}
 <div id="multimidia">
 {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}

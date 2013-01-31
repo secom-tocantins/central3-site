@@ -26,13 +26,12 @@ a.button { background: #62AC39; padding: 5px; color: white; margin-top:10px; dis
 #content.noticias ul li { list-style: none; padding: 5px 0 }
 
 /* Notícia e página */
+#content.noticia article p,
+#content.pagina article p { line-height: 20px; margin-bottom:10px; }
 
 #content.noticia article #multimidia,
 #content.noticia article #conteudo,
 #content.pagina article #conteudo { margin-bottom: 20px; }
-
-#content.noticia article #conteudo p,
-#content.pagina article #conteudo p { line-height: 20px; margin-bottom:10px; }
 
 #content.noticia article #multimidia, 
 #content.pagina article #multimidia { padding:10px; width: 300px; float: left; margin:0 10px 10px 0; background: #DFE8D7; }
