@@ -26,7 +26,7 @@ $listar = function (Silex\Application $app){
     try {
         $pagina = $app['request']->get('pagina');
         if (!is_numeric($pagina)) { $pagina = 1; }
-        $noticias = $app['client']->byUri($app['request']->getPathInfo(),"pagina={$pagina}&limite=20");
+        $noticias = $app['client']->byUri($app['request']->getPathInfo(),"pagina={$pagina}&limite=10");
         $pagina++;
         $pagina = ($pagina < $noticias->getHead()->paginas)? $pagina : 0;
         return $app['twig']->render('noticias.twig', array('noticias' => $noticias, 'proximaPagina' => $pagina));
