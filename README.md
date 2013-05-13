@@ -2,8 +2,9 @@
 
 #Instalação
 
-### Baixando o Composer
-    curl -s https://getcomposer.org/installer | php
+### Clone o projeto
+    git clone https://github.com/secom-tocantins/central3-silex-project.git
 
-### Criando o projeto
-    php composer.phar create-project secom-tocantins/central3-silex-project project_name
+### Instale as dependencias
+    cd central3-silex-project
+    make setup
