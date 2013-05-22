@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>{{ site.nome }}</title>
+        <link href="{{ app.request.baseUrl }}/css/960.gs.css" rel="stylesheet" media="screen" />
         <link href="{{ app.request.baseUrl }}/css/styles.css" rel="stylesheet" media="screen" />
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.1/jquery.fancybox.css" type="text/css" media="screen" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
@@ -10,23 +11,24 @@
     </head>
     <body>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
-        <div id="wrapper">
-            <nav>
+        <div class="container_24">
+            <nav class="grid_5">
                 <a href="{{ app.request.baseUrl }}">Inicio</a>
                 <a href="{{ app.request.baseUrl }}/noticia">Noticias</a>
                 <a href="{{ app.request.baseUrl }}/galeria">Galerias</a>
                 {% for item in menu %}
                 <a href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
                 {% endfor %}
+                <a href="{{ app.request.baseUrl }}/mapa">Mapa do Site</a>
             </nav>
-            <div id="content" class="{{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
+            <div id="content" class="grid_14 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
             {% block content %}
             {% endblock %}
             </div>
-            <sidebar>
+            <sidebar class="grid_5">
                 <script src="http://publicidade.to.gov.br/pub.php" type="text/javascript"></script>
                 {% for banner in banners %}
-                {{ banner.code|raw }}
+                {{ banner.code|resize(190)|raw }}
                 {% endfor %}
             </sidebar>
         </div>

@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<ul>
+<div id="destaques">
 {% for noticia in destaques %}
-    <li>
-        {{ noticia.thumb.code|resize(200)|raw }}
+    <div class="grid_7 {{ (loop.index is even)? 'omega' : 'alpha' }}">
+        {{ noticia.thumb.code|resize(270)|raw }}
         <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
         <p>{{ noticia.sinopse }}</p>
-    </li>
+    </div>
 {% endfor %}
-</ul>
+</div>
 
-<ul>
+<div id="noticias">
 {% for noticia in noticias %}
-    <li>
+    <div>
         <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
-    </li>
+    </div>
 {% endfor %}
-</ul>
+</div>
 
 {% endblock %}

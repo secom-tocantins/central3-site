@@ -1,0 +1,39 @@
+ {% extends 'layout/default.twig' %}
+
+{% block content %}
+
+<h1>Mapa do Site</h1>
+
+    {% macro macro_categoria(categorias) %}
+        {% for catetoria in categorias %}
+        <ul>
+            <li>
+                <a href="{{ app.request.baseUrl ~ catetoria.uri }}">{{ catetoria.titulo }}</a>
+                {{ (catetoria.filhas is defined)? _self.macro_categoria(catetoria.filhas) : '' }}
+            </li>
+        </ul>
+        {% endfor %}
+    {% endmacro %}
+
+    <div class="grid_7 alpha">
+        <p class="area subtitle">Notícias</p>
+        {{  _self.macro_categoria(categorias) }}
+    </div>
+
+    {% macro macro_pagina(paginas) %}
+        {% for pagina in paginas %}
+        <ul>
+            <li>
+            <a href="{{ app.request.baseUrl ~ pagina.uri }}">{{ pagina.titulo }}</a>
+            {{ _self.macro_pagina(pagina.filhos) }}
+            </li>
+        </ul>
+        {% endfor %}
+    {% endmacro %}
+
+    <div class="grid_7 omega">
+        <p class="area subtitle">Páginas</p>
+        {{ _self.macro_pagina(paginas) }}
+    </div>
+
+{% endblock %}

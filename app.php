@@ -16,7 +16,7 @@ $app->before(function() use ($app) {
 
 /* Home */
 $app->get('/', function (Silex\Application $app) {
-    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=3');
+    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=4');
     $noticias = $app['client']->query('noticia.listar','limite=10&negar='.$destaques->getHead()->ids);
     return $app['twig']->render('index.twig', array('destaques'=>$destaques, 'noticias' => $noticias));
 })->bind('index');
@@ -68,6 +68,17 @@ $app->get('/galeria/{slug}/', function (Silex\Application $app) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
     }
 })->bind('galeria');
+
+/* Listar galerias */
+$app->get('/mapa/', function (Silex\Application $app) {
+    try {
+        $categorias = $app['client']->query('categoria.mapa');
+        $paginas = $app['client']->query('pagina.mapa');
+        return $app['twig']->render('mapa.twig', array('paginas' => $paginas, 'categorias'=>$categorias));
+    } catch(ApiException $e) {
+        throw new NotFoundHttpException($e->getMessage(), $e, 404);
+    }
+})->bind('mapa');
 
 /* Visualizar página */
 $app->get('/{slug}/', function (Silex\Application $app) {
