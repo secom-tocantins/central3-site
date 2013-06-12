@@ -25,7 +25,7 @@
 
         log($(this));
 
-        $(settings.trigger).live('click', function(){
+        $(settings.trigger).on('click', function(){
 
             log('running start');
             settings.start();
