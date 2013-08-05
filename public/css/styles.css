@@ -1,5 +1,6 @@
 /* Geral */
 * { margin:0; padding:0; font-family: Arial; font-size: 14px; color:#666; -moz-box-sizing: border-box; box-sizing: border-box; }
+body { background: white; }
 a { text-decoration: none; color: #3C5370; }
 a:hover { text-decoration: underline; }
 
@@ -32,10 +33,10 @@ a.button { background: #62AC39; padding: 5px; color: white; margin-top:10px; dis
 #content.noticia article #conteudo,
 #content.pagina article #conteudo { margin-bottom: 20px; }
 
-#content.noticia article #multimidia, 
+#content.noticia article #multimidia,
 #content.pagina article #multimidia { padding:10px; width: 320px; float: left; margin:0 10px 10px 0; background: #DFE8D7; }
 
-#content.noticia article #multimidia ul, 
+#content.noticia article #multimidia ul,
 #content.pagina article #multimidia ul { list-style: none;  }
 
 #content.noticia article #attachment,
