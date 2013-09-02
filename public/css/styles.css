@@ -48,6 +48,9 @@ a.button { background: #62AC39; padding: 5px; color: white; margin-top:10px; dis
 #content.noticia article #attachment ul li,
 #content.pagina article #attachment ul li { line-height: 20px; }
 
+#content.noticia #share { margin:20px 0; }
+#content.noticia #share p { font-size: 20px; margin-bottom: 10px; }
+
 /* Galerias */
 
 #content.galerias { }
