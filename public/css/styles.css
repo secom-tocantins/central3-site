@@ -17,8 +17,9 @@ a.button { background: #62AC39; padding: 5px; color: white; margin-top:10px; dis
 
 /* Index */
 #content.index { }
-#content.index #destaques div { margin-bottom: 10px; }
-#content.index #destaques div a { margin:5px 0; display: block; }
+#content.index #destaques > div { height: 200px; margin-bottom: 10px; }
+#content.index #destaques > div .img.wrapper { height: 150px; overflow: hidden; }
+#content.index #destaques > div a { margin:5px 0; display: block; }
 #content.index #noticias div { margin: 10px 0; }
 
 /* Listagem de notícias */

@@ -5,7 +5,7 @@
 <div id="destaques">
 {% for noticia in destaques %}
     <div class="grid_3 {{ (loop.index is even)? 'omega' : 'alpha' }}">
-        {{ noticia.thumb.code|resize(220)|raw }}
+        <div class="img wrapper">{{ noticia.thumb.code|resize(220)|raw }}</div>
         <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
         <p>{{ noticia.sinopse }}</p>
     </div>
