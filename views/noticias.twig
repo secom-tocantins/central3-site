@@ -2,17 +2,30 @@
 
 {% block content %}
 
-<h1>Notícias</h1>
+<h1 class="margin-top-0">Notícias</h1>
 
-<div>
-    <ul>
+<div id="noticias">
+    <div>
     {% for noticia in noticias %}
-        <li>{{ noticia.data }} - <a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></li>
+        <div class="media margin-bottom">
+            <div class="media-left">
+                {% if noticia.thumb %}
+                {{ noticia.thumb.code|resize(100)|raw }}
+                {% else %}
+                <img src="http://placehold.it/100x70" />
+                {% endif %}
+            </div>
+            <div class="media-body">
+                <small>{{ noticia.data }}</small>
+                <h4 class="media-heading"><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></h4>
+                <p>{{ noticia.sinopse }}</p>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
-    
+    </div>
+
     {% if proximaPagina > 0 %}
-    <a class="next button" href="{{ app.request.uri|split('?')[0] ~ "?pagina=" ~ proximaPagina }}">Ver mais</a>
+    <a id="more" class="btn btn-primary" href="{{ app.request.uri|split('?')[0] ~ "?pagina=" ~ proximaPagina }}"><span class="glyphicon glyphicon-refresh"></span> Ver mais notícias</a>
     {% endif %}
 </div>
 

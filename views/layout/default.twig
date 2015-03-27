@@ -2,39 +2,62 @@
 <html>
     <head>
         <title>{{ site.nome }}</title>
-        <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script><![endif]-->
-        <link href="//cdnjs.cloudflare.com/ajax/libs/960gs/0/960.css" rel="stylesheet" media="screen" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.15.2/css/blueimp-gallery.min.css">
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.15.2/js/jquery.blueimp-gallery.min.js"></script>
+        <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
+
         <link href="{{ app.request.baseUrl }}/css/styles.css" rel="stylesheet" media="screen" />
-        <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen" />
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.pack.js" type="text/javascript"></script>
+
         <script src="{{ app.request.baseUrl }}/js/jquery.scroll4ever.js" type="text/javascript"></script>
         <script src="{{ app.request.baseUrl }}/js/scripts.js" type="text/javascript"></script>
+
         <script type="text/javascript">var switchTo5x=true;</script>
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "5a75cd93-c2ec-4aa4-a318-b4dbaf8802b1", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
     <body>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
-        <div class="container_12">
-            <nav class="grid_3">
-                <a href="{{ app.request.baseUrl }}">Inicio</a>
-                <a href="{{ app.request.baseUrl }}/noticia">Notícias</a>
-                <a href="{{ app.request.baseUrl }}/galeria">Galerias</a>
-                {% for item in menu %}
-                <a href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
-                {% endfor %}
-                <a href="{{ app.request.baseUrl }}/mapa">Mapa do Site</a>
-            </nav>
-            <div id="content" class="grid_6 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
+        <div class="container margin-top">
+            <div class="col-sm-3">
+
+                <div class="navbar navbar-default visible-xs" role="navigation">
+                    <span class="navbar-brand">Navegação</span>
+                    <button type="button" class="glyphicon glyphicon-menu-hamburger navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+                </div>
+                <nav class="navbar navbar-collapse collapse" role="navigation">
+                    <a class="" href="{{ app.request.baseUrl }}/">Inicio</a>
+                    <a class="" href="{{ app.request.baseUrl }}/noticia">Notícias</a>
+                    <a class="" href="{{ app.request.baseUrl }}/galeria">Galerias</a>
+                    {% for item in menu %}
+                    <a class="" href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
+                    {% endfor %}
+                </nav>
+
+            </div>
+            <div id="conteudo" class="col-sm-6 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
             {% block content %}
             {% endblock %}
             </div>
-            <sidebar class="grid_3">
-                <script src="http://publicidade.to.gov.br/pub.php" type="text/javascript"></script>
-                {% for banner in banners %}
-                {{ banner.code|resize(190)|raw }}
-                {% endfor %}
+            <sidebar class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-12 col-sx-6">
+                        <script src="http://publicidade.to.gov.br/pub.php" type="text/javascript"></script>
+                    </div>
+                    {% for banner in banners %}
+                        <div class="col-sm-12 col-xs-6">
+                            <div class="img-wrapper margin-bottom">
+                            {{ banner.code|resize(250)|raw }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </sidebar>
         </div>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>

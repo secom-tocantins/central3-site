@@ -1,10 +1,12 @@
 {% if (pagina.multimidia.audios) %}
-<ul id="audios">
+
+<div id="audios">
 {% for audio in pagina.multimidia.audios %}
-    <li>
+    <div class="margin-bottom">
         {{ audio.code|resize(300)|raw }}
         {{ audio.titulo }}
-    </li>
+    </div>
 {% endfor %}
-</ul>
+</div>
+
 {% endif %}

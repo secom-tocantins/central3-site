@@ -1,8 +1,11 @@
 {% if (pagina.multimidia.links) %}
-<h2>Link(s)</h2>
+
+<h4>Links</h4>
+
 <ul id="links">
 {% for link in pagina.multimidia.links %}
     <li>{{ link.code|raw }}</li>
 {% endfor %}
 </ul>
+
 {% endif %}

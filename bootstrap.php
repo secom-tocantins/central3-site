@@ -12,22 +12,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __
 $app['twig']->addFilter('resize', new Twig_Filter_Function(
     function($string, $width, $height = false)
     {
-        if (strstr($string, ".jpg")) {
-            return str_replace('.jpg', "/{$width}.jpg", $string);
-        }
-        if (preg_match('@width="([0-9]+)"@', $string, $matches)) {
-            $w = $matches[1];
-            $string = str_replace($matches[0], 'width="'. $width .'"', $string);
-            if (($height === true) && preg_match('@height="([0-9]+)"@', $string, $matches)) {
-                $h = $width * 0.8;
-                $string = str_replace($matches[0], 'height="'. $h .'"', $string);
-            }
-            if (is_numeric($height)) {
-                $string = preg_replace('@height="([0-9]+)"@', 'height="'. $height .'"', $string);
-            }
-            return $string;
-        }
-        return $string;   
+        if (!strstr($string, ".jpg")) { return $string; }
+        if ($height) { return str_replace('.jpg', "_{$width}x{$height}.jpg", $string); }
+        return str_replace('.jpg', "_{$width}.jpg", $string);
     }
 ));
 
@@ -45,7 +32,7 @@ $app['twig']->addFilter('var_dump', new Twig_Filter_Function('var_dump'));
 /* Cache */
 $app['cache'] = $app->share(function() use ($app) {
     if ($app['debug']) {
-        return null;    
+        return null;
     }
     $mc = new \Memcached();
     $mc->addServer('localhost', 11211);

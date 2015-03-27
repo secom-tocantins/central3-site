@@ -2,11 +2,19 @@
 
 {% block content %}
 
-<h1>Galerias</h1>
+<h1 class="margin-top-0">Galerias</h1>
 
 {% if galerias %}
     {% for galeria in galerias %}
-        <div><a href="{{ app.request.baseUrl ~ galeria.uri }}">{{ galeria.titulo }}</a></div>
+    <div class="media margin-bottom">
+        <div class="media-left">
+            {{ galeria.fotos[0].code|resize(100)|raw }}
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="{{ app.request.basePath ~ galeria.uri }}">{{ galeria.titulo }}</a></h4>
+            <p>{{ galeria.descricao }}</p>
+        </div>
+    </div>
     {% endfor %}
 {% else %}
     <p>Nenhuma galeria cadastrada.</p>

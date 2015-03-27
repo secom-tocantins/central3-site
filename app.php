@@ -16,9 +16,12 @@ $app->before(function() use ($app) {
 
 /* Home */
 $app->get('/', function (Silex\Application $app) {
-    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=4');
-    $noticias = $app['client']->query('noticia.listar','limite=10&negar='.$destaques->getHead()->ids);
-    return $app['twig']->render('index.twig', array('destaques'=>$destaques, 'noticias' => $noticias));
+    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=3');
+    $ids = $destaques->getHead()->ids;
+    $destaques2 = $app['client']->query('noticia.listar',"destaque=s&temfoto=s&thumb=s&limite=2&negar={$ids}");
+    $ids = ',' . $destaques2->getHead()->ids;
+    $noticias = $app['client']->query('noticia.listar',"limite=5&negar={$ids}");
+    return $app['twig']->render('index.twig', array('destaques'=>$destaques, 'destaques2' => $destaques2, 'noticias' => $noticias));
 })->bind('index');
 
 /* Listar notícias */
@@ -26,7 +29,7 @@ $listar = function (Silex\Application $app){
     try {
         $pagina = $app['request']->get('pagina');
         if (!is_numeric($pagina)) { $pagina = 1; }
-        $noticias = $app['client']->byUri($app['request']->getPathInfo(),"pagina={$pagina}&limite=10");
+        $noticias = $app['client']->byUri($app['request']->getPathInfo(),"pagina={$pagina}&limite=10&thumb=s");
         $pagina++;
         $pagina = ($pagina < $noticias->getHead()->paginas)? $pagina : 0;
         return $app['twig']->render('noticias.twig', array('noticias' => $noticias, 'proximaPagina' => $pagina));
@@ -62,7 +65,7 @@ $app->get('/busca/', function (Silex\Application $app) {
 /* Listar galerias */
 $app->get('/galeria/', function (Silex\Application $app) {
     try {
-        $galerias = $app['client']->byUri($app['request']->getPathInfo());
+        $galerias = $app['client']->byUri($app['request']->getPathInfo(),"thumb=s");
         return $app['twig']->render('galerias.twig', array('galerias' => $galerias));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -79,7 +82,7 @@ $app->get('/galeria/{slug}/', function (Silex\Application $app) {
     }
 })->bind('galeria');
 
-/* Listar galerias */
+/* Mapa do site */
 $app->get('/mapa/', function (Silex\Application $app) {
     try {
         $categorias = $app['client']->query('categoria.mapa');

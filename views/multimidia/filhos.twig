@@ -1,7 +1,9 @@
 {% if (pagina.filhos) %}
+
 <ul id="filhos">
 {% for filho in pagina.filhos %}
     <li><a href="{{ app.request.basePath ~ filho.uri }}">{{filho.titulo}}</a></li>
 {% endfor %}
 </ul>
+
 {% endif %}

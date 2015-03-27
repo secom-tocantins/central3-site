@@ -4,30 +4,23 @@
 
 <article>
 
-<h1>{{ pagina.titulo|e }}</h1>
-
+<h1 class="margin-top-0">{{ pagina.titulo|e }}</h1>
 <p>{{ pagina.data }} - {{ pagina.autor }}</p>
 
-{% if pagina.multimidia.fotos or pagina.multimidia.videos or pagina.multimidia.audios %}
-<div id="multimidia">
-{% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
 {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
 {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
-</div>
-{% endif %}
+{% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
 
-<div id="conteudo">
-{{ pagina.conteudo|raw }}
+<div>
+    {{ pagina.conteudo|raw }}
 </div>
 
-<div id="attachment">
 {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
-</div>
 
 </article>
 
 <div id="share">
-	<p class="title">Compartilhe esta notícia:</p>
+	<h4 class="title">Compartilhe esta notícia</h4>
 	<span class='st_facebook_large' displayText='Facebook'></span>
 	<span class='st_twitter_large' displayText='Tweet'></span>
 	<span class='st_googleplus_large' displayText='Google +'></span>
