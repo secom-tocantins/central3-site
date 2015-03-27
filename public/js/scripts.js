@@ -8,4 +8,6 @@ $(document).ready(function() {
         start: function(){ $('#noticias a#more').html('Carregando...');  }, // callback called when a new page load begins, good for loading messages
         complete: function(){}, // callback called when a new page load ends
     });
+
+    $('a[href="'+ window.location.pathname +'"]').addClass('active');
 });

@@ -2,9 +2,11 @@
 
 {% block content %}
 
+<h3 class="area-title margin-top-0">Notícias</h3>
+
 <article>
 
-<h1 class="margin-top-0">{{ pagina.titulo|e }}</h1>
+<h1>{{ pagina.titulo|e }}</h1>
 <p>{{ pagina.data }} - {{ pagina.autor }}</p>
 
 {% include "multimidia/videos.twig" with { 'pagina':pagina } %}

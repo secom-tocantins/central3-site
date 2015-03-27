@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<h3 class="area-title margin-top-0">Destaques</h3>
 
 <div id="carousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -14,8 +15,7 @@
         <div class="item {{ (loop.index == 1)? 'active' : '' }}">
             {{ noticia.thumb.code|resize(700,420)|raw }}
             <div class="carousel-caption">
-                <a href="{{ app.request.baseUrl ~ noticia.uri }}"><h4>{{ noticia.titulo }}</h4></a>
-                <p>{{ noticia.sinopse }}</p>
+                <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
             </div>
         </div>
         {% endfor %}
@@ -43,6 +43,8 @@
     </div>
     {% endfor %}
 </div>
+
+<h3 class="area-title">Notícias</h3>
 
 <div>
     {% for noticia in noticias %}

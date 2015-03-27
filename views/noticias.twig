@@ -8,13 +8,17 @@
     <div>
     {% for noticia in noticias %}
         <div class="media margin-bottom">
+
+            {% if noticia.thumb %}
             <div class="media-left">
-                {% if noticia.thumb %}
                 {{ noticia.thumb.code|resize(100)|raw }}
-                {% else %}
-                <img src="http://placehold.it/100x70" />
-                {% endif %}
             </div>
+            {% else %}
+            <div class="media-left">
+                <div class="no-media"></div>
+            </div>
+            {% endif %}
+
             <div class="media-body">
                 <small>{{ noticia.data }}</small>
                 <h4 class="media-heading"><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></h4>
