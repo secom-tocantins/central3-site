@@ -8,7 +8,7 @@
     {% for galeria in galerias %}
     <div class="media margin-bottom">
         <div class="media-left">
-            {{ galeria.fotos[0].code|resize(100)|raw }}
+            {{ galeria.fotos[0].code|resize(100,60)|raw }}
         </div>
         <div class="media-body">
             <h4 class="media-heading"><a href="{{ app.request.basePath ~ galeria.uri }}">{{ galeria.titulo }}</a></h4>
