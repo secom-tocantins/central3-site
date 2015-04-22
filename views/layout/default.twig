@@ -14,14 +14,14 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.15.2/js/jquery.blueimp-gallery.min.js"></script>
         <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
 
-        <link href="{{ app.request.baseUrl }}/css/styles.css" rel="stylesheet" media="screen" />
-        <script src="{{ app.request.baseUrl }}/js/scripts.js" type="text/javascript"></script>
+        <link href="{{ app.request.baseUrl ~ asset('/css/styles.css') }}" rel="stylesheet" media="screen" />
+        <script src="{{ app.request.baseUrl ~ asset('/js/scripts.js') }}" type="text/javascript"></script>
 
         <script type="text/javascript">var switchTo5x=true;</script>
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "5a75cd93-c2ec-4aa4-a318-b4dbaf8802b1", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
-    <body>
+    <body class="{{ app.request.getRoute() }}">
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
         <div class="container margin-top">
             <div class="col-sm-3">

@@ -8,6 +8,16 @@ $app['debug'] = (getenv('APPLICATION_ENV') == 'development');
 /* Twig */
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/views'));
 
+/* Assets */
+$app['twig']->addFunction(new \Twig_SimpleFunction('asset',
+    function ($asset) {
+    $asset =  ltrim($asset,'/');
+        $assetPath = __DIR__ . '/public/' . $asset;
+        if (file_exists($assetPath)) { $asset .= '?' . filemtime($assetPath); }
+        return "/{$asset}";
+    }
+));
+
 /* Alterar tamanho das imagens e vídeos da Central */
 $app['twig']->addFilter('resize', new Twig_Filter_Function(
     function($string, $width, $height = false)
