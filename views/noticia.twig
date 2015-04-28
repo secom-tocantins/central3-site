@@ -2,33 +2,37 @@
 
 {% block content %}
 
-<h3 class="area-title margin-top-0">Notícias</h3>
+<div class="col-sm-12">
 
-<article>
+    <h3 class="area-title margin-top-0">Notícias</h3>
 
-<h1>{{ pagina.titulo|e }}</h1>
-<p>{{ pagina.data }} - {{ pagina.autor }}</p>
+    <article>
 
-{% include "multimidia/videos.twig" with { 'pagina':pagina } %}
-{% include "multimidia/audios.twig" with { 'pagina':pagina } %}
-{% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
+    <h1>{{ pagina.titulo|e }}</h1>
+    <p>{{ pagina.data }} - {{ pagina.autor }}</p>
 
-<div>
-    {{ pagina.conteudo|raw }}
-</div>
+    {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
+    {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
+    {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
 
-{% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+    <div>
+        {{ pagina.conteudo|raw }}
+    </div>
 
-</article>
+    {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
 
-<div id="share">
-	<h4 class="title">Compartilhe esta notícia</h4>
-	<span class='st_facebook_large' displayText='Facebook'></span>
-	<span class='st_twitter_large' displayText='Tweet'></span>
-	<span class='st_googleplus_large' displayText='Google +'></span>
-	<span class='st_pinterest_large' displayText='Pinterest'></span>
-	<span class='st_delicious_large' displayText='Delicious'></span>
-	<span class='st_email_large' displayText='Email'></span>
+    </article>
+
+    <div id="share">
+    	<h4 class="title">Compartilhe esta notícia</h4>
+    	<span class='st_facebook_large' displayText='Facebook'></span>
+    	<span class='st_twitter_large' displayText='Tweet'></span>
+    	<span class='st_googleplus_large' displayText='Google +'></span>
+    	<span class='st_pinterest_large' displayText='Pinterest'></span>
+    	<span class='st_delicious_large' displayText='Delicious'></span>
+    	<span class='st_email_large' displayText='Email'></span>
+    </div>
+
 </div>
 
 {% endblock %}

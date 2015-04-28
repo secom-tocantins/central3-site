@@ -43,27 +43,11 @@
                 </nav>
 
             </div>
-            <div id="conteudo" class="col-sm-6 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
+            <div id="conteudo" class="row col-sm-9 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
             {% block content %}
             {% endblock %}
             </div>
-            <sidebar class="col-sm-3">
-                <h3 class="area-title margin-top-0">Serviços</h3>
-                <div class="row">
-                    <div class="col-sm-12 col-xs-6">
-                        <div class="img-wrapper margin-bottom">
-                            <script src="http://publicidade.to.gov.br/pub.php" type="text/javascript"></script>
-                        </div>
-                    </div>
-                    {% for banner in banners %}
-                        <div class="col-sm-12 col-xs-6">
-                            <div class="img-wrapper margin-bottom">
-                            {{ banner.code|resize(250)|raw }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </sidebar>
+
         </div>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>
     </body>

@@ -2,35 +2,39 @@
 
 {% block content %}
 
-<h1 class="margin-top-0">Notícias</h1>
+<div class="col-sm-12">
 
-<div id="noticias">
-    <div>
-    {% for noticia in noticias %}
-        <div class="media margin-bottom">
+    <h1 class="margin-top-0">Notícias</h1>
 
-            {% if noticia.thumb %}
-            <div class="media-left">
-                {{ noticia.thumb.code|resize(100)|raw }}
-            </div>
-            {% else %}
-            <div class="media-left">
-                <div class="no-media"></div>
-            </div>
-            {% endif %}
+    <div id="noticias">
+        <div>
+        {% for noticia in noticias %}
+            <div class="media margin-bottom">
 
-            <div class="media-body">
-                <small>{{ noticia.data }}</small>
-                <h4 class="media-heading"><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></h4>
-                <p>{{ noticia.sinopse }}</p>
+                {% if noticia.thumb %}
+                <div class="media-left">
+                    {{ noticia.thumb.code|resize(100)|raw }}
+                </div>
+                {% else %}
+                <div class="media-left">
+                    <div class="no-media"></div>
+                </div>
+                {% endif %}
+
+                <div class="media-body">
+                    <small>{{ noticia.data }}</small>
+                    <h4 class="media-heading"><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></h4>
+                    <p>{{ noticia.sinopse }}</p>
+                </div>
             </div>
+        {% endfor %}
         </div>
-    {% endfor %}
+
+        {% if proximaPagina > 0 %}
+        <a id="more" class="btn btn-primary" href="{{ app.request.uri|split('?')[0] ~ "?pagina=" ~ proximaPagina }}"><span class="glyphicon glyphicon-refresh"></span> Ver mais notícias</a>
+        {% endif %}
     </div>
 
-    {% if proximaPagina > 0 %}
-    <a id="more" class="btn btn-primary" href="{{ app.request.uri|split('?')[0] ~ "?pagina=" ~ proximaPagina }}"><span class="glyphicon glyphicon-refresh"></span> Ver mais notícias</a>
-    {% endif %}
 </div>
 
 {% endblock %}

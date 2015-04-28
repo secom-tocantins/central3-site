@@ -11,17 +11,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
 $app->before(function() use ($app) {
     $app['twig']->addGlobal('site', $app['client']->query('site.info')[0]);
     $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
-    $app['twig']->addGlobal('banners', $app['client']->query('banner.listar','area=75407'));
 });
 
 /* Home */
 $app->get('/', function (Silex\Application $app) {
+    $banners = $app['client']->query('banner.listar','area=75407');
     $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=3');
     $ids = $destaques->getHead()->ids;
     $destaques2 = $app['client']->query('noticia.listar',"destaque=s&temfoto=s&thumb=s&limite=2&negar={$ids}");
     $ids = ',' . $destaques2->getHead()->ids;
     $noticias = $app['client']->query('noticia.listar',"limite=5&negar={$ids}");
-    return $app['twig']->render('index.twig', array('destaques'=>$destaques, 'destaques2' => $destaques2, 'noticias' => $noticias));
+    return $app['twig']->render('index.twig', array('banners'=>$banners,'destaques'=>$destaques, 'destaques2' => $destaques2, 'noticias' => $noticias));
 })->bind('index');
 
 /* Listar notícias */

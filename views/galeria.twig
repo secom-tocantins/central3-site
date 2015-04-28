@@ -2,28 +2,32 @@
 
 {% block content %}
 
-<h1 class="margin-top-0">Galeria: {{ galeria.titulo }}</h1>
+<div class="col-sm-12">
 
-<p>{{ galeria.descricao }}</p>
+    <h1 class="margin-top-0">Galeria: {{ galeria.titulo }}</h1>
 
-<div class="row">
+    <p>{{ galeria.descricao }}</p>
 
-{% for foto in galeria.fotos %}
-    <a class="col-xs-3 img-wrapper margin-bottom" title="{{ foto.legenda }}" data-gallery href="{{ foto.url|resize(1000) }}">
-        {{ foto.code|resize(110,60)|raw }}
-    </a>
-{% endfor %}
+    <div class="row">
 
-</div>
+    {% for foto in galeria.fotos %}
+        <a class="col-xs-3 img-wrapper margin-bottom" title="{{ foto.legenda }}" data-gallery href="{{ foto.url|resize(1000) }}">
+            {{ foto.code|resize(110,60)|raw }}
+        </a>
+    {% endfor %}
 
-<div id="blueimp-gallery" class="blueimp-gallery" data-start-slideshow="true">
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
+    </div>
+
+    <div id="blueimp-gallery" class="blueimp-gallery" data-start-slideshow="true">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+
 </div>
 
 {% endblock %}

@@ -2,37 +2,41 @@
 
 {% block content %}
 
-<h1>Busca: {{ busca }}</h1>
+<div class="col-sm-12">
 
-<form action="" method="get">
-    <input type="text" name="q" value="{{ busca }}" />
-    <input type="submit" value="Buscar" />
-</form>
+    <h1>Busca: {{ busca }}</h1>
 
-<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-<script language="Javascript" type="text/javascript">
-    google.load('search', '1');
-    function OnLoad()
-    {
-            var searchControl = new google.search.SearchControl();
+    <form action="" method="get">
+        <input type="text" name="q" value="{{ busca }}" />
+        <input type="submit" value="Buscar" />
+    </form>
 
-            var options = new google.search.SearcherOptions();
-            options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
-            options.setRoot(document.getElementById("resultados"));
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script language="Javascript" type="text/javascript">
+        google.load('search', '1');
+        function OnLoad()
+        {
+                var searchControl = new google.search.SearchControl();
 
-            webSearch = new google.search.WebSearch();
-            webSearch.setSiteRestriction("{{ app.request.host }}");
+                var options = new google.search.SearcherOptions();
+                options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
+                options.setRoot(document.getElementById("resultados"));
 
-            searchControl.addSearcher(webSearch, options);
-            searchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
-            searchControl.draw(document.getElementById("search_control"));
+                webSearch = new google.search.WebSearch();
+                webSearch.setSiteRestriction("{{ app.request.host }}");
 
-            searchControl.execute("{{ busca }}");
-    }
-    google.setOnLoadCallback(OnLoad);
-</script>
-<div id="resultados">
-        Carregando...
+                searchControl.addSearcher(webSearch, options);
+                searchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+                searchControl.draw(document.getElementById("search_control"));
+
+                searchControl.execute("{{ busca }}");
+        }
+        google.setOnLoadCallback(OnLoad);
+    </script>
+    <div id="resultados">
+            Carregando...
+    </div>
+
 </div>
 
 {% endblock %}
