@@ -7,9 +7,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
     Secom\Central3\Client\Exception\CommunicationException,
     \Exception;
 
+function appendTitle($app, $newTitle)
+{
+    $title = $app['twig']->getGlobals()['title'];
+    array_unshift($title, $newTitle);
+    $app['twig']->addGlobal('title', $title);
+}
+
 /* Itens comuns */
 $app->before(function() use ($app) {
-    $app['twig']->addGlobal('site', $app['client']->query('site.info')[0]);
+    $site = $app['client']->query('site.info')[0];
+    $title = array($site->nome);
+    $app['twig']->addGlobal('title', $title);
     $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
 });
 
@@ -28,6 +37,7 @@ $app->get('/', function (Silex\Application $app) {
 $listar = function (Silex\Application $app){
     try {
         $pagina = $app['request']->get('pagina');
+        appendTitle($app, 'Notícias');
         if (!is_numeric($pagina)) { $pagina = 1; }
         $noticias = $app['client']->byUri($app['request']->getPathInfo(),"pagina={$pagina}&limite=10&thumb=s");
         $pagina++;
@@ -46,6 +56,8 @@ $app->get('/noticia/{ano}/{mes}/{dia}/', $listar)->bind('noticias.ano.mes.dia');
 $app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app) {
     try {
         $noticia = $app['client']->byUri($app['request']->getPathInfo());
+        appendTitle($app, 'Notícias');
+        appendTitle($app, $noticia->titulo);
         return $app['twig']->render('noticia.twig', array('pagina' => $noticia));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -56,6 +68,8 @@ $app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app
 $app->get('/busca/', function (Silex\Application $app) {
     try {
         $busca = $app['request']->query->get('q');
+        appendTitle($app, 'Busca');
+        appendTitle($app, $busca);
         return $app['twig']->render('busca.twig', array('busca' => $busca));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -66,6 +80,7 @@ $app->get('/busca/', function (Silex\Application $app) {
 $app->get('/galeria/', function (Silex\Application $app) {
     try {
         $galerias = $app['client']->byUri($app['request']->getPathInfo(),"thumb=s");
+        appendTitle($app, 'Galerias');
         return $app['twig']->render('galerias.twig', array('galerias' => $galerias));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -76,6 +91,8 @@ $app->get('/galeria/', function (Silex\Application $app) {
 $app->get('/galeria/{slug}/', function (Silex\Application $app) {
     try {
         $galeria = $app['client']->byUri($app['request']->getPathInfo());
+        appendTitle($app, 'Galerias');
+        appendTitle($app, $galeria->titulo);
         return $app['twig']->render('galeria.twig', array('galeria' => $galeria));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -87,6 +104,7 @@ $app->get('/mapa/', function (Silex\Application $app) {
     try {
         $categorias = $app['client']->query('categoria.mapa');
         $paginas = $app['client']->query('pagina.mapa');
+        appendTitle($app, 'Mapa do Site');
         return $app['twig']->render('mapa.twig', array('paginas' => $paginas, 'categorias'=>$categorias));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
@@ -97,6 +115,7 @@ $app->get('/mapa/', function (Silex\Application $app) {
 $app->get('/{slug}/', function (Silex\Application $app) {
     try {
         $pagina = $app['client']->byUri($app['request']->getPathInfo());
+        appendTitle($app, $pagina->titulo);
         return $app['twig']->render('pagina.twig', array('pagina' => $pagina));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);

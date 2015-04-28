@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{ site.nome }}</title>
+        <title>{{ title|join(' - ') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% if content and pagina.multimidia.fotos %}
+        <meta property="og:image" content="{{ pagina.multimidia.fotos[1].url }}" />
+        {% endif %}
 
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
