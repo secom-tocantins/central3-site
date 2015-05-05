@@ -2,8 +2,6 @@
 h1, h2, h3, h4, h5 { color:#245A98; margin:20px 0 }
 h3.area-title { font-size: 1.4em; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #A9B8CF; padding-bottom: 3px; }
 
-.container { max-width: 970px; }
-
 .margin-bottom { margin-bottom: 20px; }
 .margin-top { margin-top: 20px; }
 .margin-top-0 { margin-top:0; }
