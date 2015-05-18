@@ -4,7 +4,7 @@
         <title>{{ title|join(' - ') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% if content and pagina.multimidia.fotos %}
+        {% if content is defined and pagina.multimidia.fotos %}
         <meta property="og:image" content="{{ pagina.multimidia.fotos[1].url }}" />
         {% endif %}
 
@@ -25,7 +25,7 @@
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "5a75cd93-c2ec-4aa4-a318-b4dbaf8802b1", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
-    <body class="{{ app.request.getRoute() }}">
+    <body class="{{ app.request.get('_route') }}">
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
         <div class="container margin-top">
             <div class="col-sm-3">
