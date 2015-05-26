@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function setup
+{
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar install --dev --prefer-dist
+}
+
+function server
+{
+    php -S 0.0.0.0:8000 -t public/
+}
+
+$1

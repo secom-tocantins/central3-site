@@ -3,7 +3,7 @@ require_once __DIR__.'/vendor/autoload.php';
 
 /* Silex */
 $app = new Silex\Application();
-$app['debug'] = (getenv('APPLICATION_ENV') == 'development');
+$app['debug'] = !(getenv('APPLICATION_ENV') == 'production');
 
 /* Twig */
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/views'));

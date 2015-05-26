@@ -4,7 +4,7 @@
         <title>{{ title|join(' - ') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% if content and pagina.multimidia.fotos %}
+        {% if content is defined and pagina.multimidia.fotos %}
         <meta property="og:image" content="{{ pagina.multimidia.fotos[1].url }}" />
         {% endif %}
 
