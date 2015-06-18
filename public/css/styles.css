@@ -6,11 +6,12 @@ h3.area-title { font-size: 1.4em; font-weight: bold; text-transform: uppercase; 
 .margin-top { margin-top: 20px; }
 .margin-top-0 { margin-top:0; }
 
-.nav { border:1px solid #D9E0EA; box-shadow: 5px 5px 0px #F2F6F9; padding: 10px; }
-.nav a { display: block; float: left; clear: both; color:#22538E; padding:5px 10px; border-radius: 5px; font-size: 1.1em; margin-bottom: -5px; }
-.nav a.active { background:#FFCD00; margin-bottom: 2px; margin-top: 7px; }
+.nav { padding: 0; margin-bottom: 20px; }
+.nav a { display: block; clear: both; color:#22538E; padding:5px 10px; font-size: 1.1em; border-bottom: 1px solid #D6DBE2; }
+.nav a:hover { background:#9EB1CB; color:white; font-weight: bold; text-decoration: none; }
+.nav a.active { background:#5476AA; color:white; font-weight: bold; }
 .nav a:last-child { margin-bottom: 10px; }
-.nav a:hover { background:#FFCD00; text-decoration: none; }
+
 
 .carousel a { color:white; font-size: 1.2em; line-height: 1.0em; font-weight: bold; }
 .carousel .carousel-indicators { bottom:45px; }
