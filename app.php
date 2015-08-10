@@ -111,6 +111,16 @@ $app->get('/mapa/', function (Silex\Application $app) {
     }
 })->bind('mapa');
 
+/* Listar contatos */
+$app->get('/contatos/', function (Silex\Application $app) {
+    try {
+        $contatos = $app['client']->query('contato.listar');
+        return $app['twig']->render('contatos.twig', array('contatos' => $contatos));
+    } catch(ApiException $e) {
+        throw new NotFoundHttpException($e->getMessage(), $e, 404);
+    }
+})->bind('contatos');
+
 /* Visualizar página */
 $app->get('/{slug}/', function (Silex\Application $app) {
     try {
