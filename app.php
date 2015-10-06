@@ -5,6 +5,7 @@ include('../bootstrap.php');
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
     Secom\Central3\Client\Exception\ApiException,
     Secom\Central3\Client\Exception\CommunicationException,
+    Secom\Central3\Client\Helper,
     \Exception;
 
 function appendTitle($app, $newTitle)
@@ -99,6 +100,42 @@ $app->get('/galeria/{slug}/', function (Silex\Application $app) {
     }
 })->bind('galeria');
 
+/* Listar contatos */
+$app->get('/contatos/', function (Silex\Application $app) {
+    try {
+        $contatos = $app['client']->query('contato.listar');
+        return $app['twig']->render('contatos.twig', array('contatos' => $contatos));
+    } catch(ApiException $e) {
+        throw new NotFoundHttpException($e->getMessage(), $e, 404);
+    }
+})->bind('contatos');
+
+/* Listar eventos */
+$app->get('/eventos/', function (Silex\Application $app) {
+    try {
+        appendTitle($app, 'Calendário de Eventos');
+        $eventos = $app['client']->query('evento.listar','thumb=s');
+        $json=Helper::eventosToJson($eventos,$app);
+        $hodie=date("Y-m-d");
+        return $app['twig']->render('eventos.twig', array('eventos' => $eventos, 'json'=>$json, 'hodie'=>$hodie));
+    } catch(ApiException $e) {
+        throw new NotFoundHttpException($e->getMessage(), $e, 404);
+    }
+})->bind('eventos');
+
+/* Visualizar evento */
+$app->get('/evento/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app) {
+    try {
+        $evento =  $app['client']->byUri($app['request']->getPathInfo());
+        appendTitle($app, 'Eventos');
+        appendTitle($app, $evento->titulo);
+        $evento=Helper::normalizeEvento($evento,$app);
+        return $app['twig']->render('evento.twig', array('pagina' => $evento));
+    } catch(ApiException $e) {
+        throw new NotFoundHttpException($e->getMessage(), $e, 404);
+    }
+})->bind('evento');
+
 /* Mapa do site */
 $app->get('/mapa/', function (Silex\Application $app) {
     try {
@@ -111,15 +148,6 @@ $app->get('/mapa/', function (Silex\Application $app) {
     }
 })->bind('mapa');
 
-/* Listar contatos */
-$app->get('/contatos/', function (Silex\Application $app) {
-    try {
-        $contatos = $app['client']->query('contato.listar');
-        return $app['twig']->render('contatos.twig', array('contatos' => $contatos));
-    } catch(ApiException $e) {
-        throw new NotFoundHttpException($e->getMessage(), $e, 404);
-    }
-})->bind('contatos');
 
 /* Visualizar página */
 $app->get('/{slug}/', function (Silex\Application $app) {

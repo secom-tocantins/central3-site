@@ -25,13 +25,10 @@
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "5a75cd93-c2ec-4aa4-a318-b4dbaf8802b1", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
-    <body class="{{ app.request.get('_route') }}">
+    <body class="{{ app.request.get('_route')|replace({'.':' '}) }}">
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/topo.js?k={{ app.request.host }}"></script>
         <div class="container margin-top">
             <div class="col-sm-3">
-
-                <h3 class="hidden-xs area-title margin-top-0">Navegação</h3>
-
                 <div class="navbar navbar-default visible-xs" role="navigation">
                     <span class="navbar-brand">Navegação</span>
                     <button type="button" class="glyphicon glyphicon-menu-hamburger navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
@@ -41,6 +38,7 @@
                     <a class="" href="{{ app.request.baseUrl }}/">Inicio</a>
                     <a class="" href="{{ app.request.baseUrl }}/noticia/">Notícias</a>
                     <a class="" href="{{ app.request.baseUrl }}/galeria/">Galerias</a>
+                    <a class="" href="{{ app.request.baseUrl }}/eventos/">Eventos</a>
                     <a class="" href="{{ app.request.baseUrl }}/contatos/">Contatos</a>
                     {% for item in menu %}
                     <a class="" href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
@@ -48,10 +46,12 @@
                 </nav>
 
             </div>
-            <div id="conteudo" class="row col-sm-9 {{ app.request.attributes.get('_route')|replace({'.':' '}) }}">
-            {% block content %}
-            {% endblock %}
-            </div>
+            <div class="col-sm-9">
+              <div id="conteudo" class="row">
+              {% block content %}
+              {% endblock %}
+              </div>
+          </div>
 
         </div>
         <script type="text/javascript" charset="utf-8" src="http://barra.to.gov.br/base.js?k={{ app.request.host }}"></script>

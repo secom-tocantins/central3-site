@@ -1,0 +1,59 @@
+{% extends 'layout/default.twig' %}
+
+{% block content %}
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<div class="col-sm-12">
+    <article>
+
+    <h1>{{ pagina.titulo }}</h1>
+
+    <div id="mapa" class="map-wrapper"></div>
+
+    </article>
+
+    <div id="share">
+        <h4 class="title">Compartilhe este pagina</h4>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pinterest_large' displayText='Pinterest'></span>
+        <span class='st_delicious_large' displayText='Delicious'></span>
+        <span class='st_email_large' displayText='Email'></span>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+        var geocoder;
+        var map;
+        var marker;
+
+        function initialize() {
+            var latlng = new google.maps.LatLng({{ pagina.localizacao }});
+            var options = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("mapa"), options);
+
+            geocoder = new google.maps.Geocoder();
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+            });
+
+            marker.setPosition(latlng);
+        }
+
+$(document).ready(function () {
+    initialize();
+    });
+</script>
+
+
+{% endblock %}
