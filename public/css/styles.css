@@ -23,4 +23,4 @@ h3.area-title { font-size: 1.4em; font-weight: bold; text-transform: uppercase; 
 
 .map-wrapper { position: relative; padding-bottom: 50%; padding-top: 25px; height: 0; }
 
-#conteudo.noticias .media .no-media { display: block; width: 100px; height: 70px; background: url('no-media.png') #245A98; }
+body.noticias #conteudo .item .no-media { display: block; width: 100px; height: 70px; background: url('no-media.png') #245A98; }
