@@ -9,24 +9,27 @@
     <div id="noticias">
         <div>
         {% for noticia in noticias %}
-            <div class="item margin-bottom">
 
-                {% if noticia.thumb %}
-                <div class="media-left">
-                    {{ noticia.thumb.code|resize(100)|raw }}
-                </div>
-                {% else %}
-                <div class="media-left">
-                    <div class="no-media"></div>
-                </div>
-                {% endif %}
+            <div class="media margin-bottom">
+                <small>{{ noticia.data }} - {{ noticia.hora }} - {{ noticia.autor }}</small>
+                <a href="{{ app.request.basePath ~ noticia.uri }}">
+                    {% if noticia.thumb %}
+                    <div class="media-left">
+                        {{ noticia.thumb.code|resize(100)|raw }}
+                    </div>
+                    {% else %}
+                    <div class="media-left">
+                        <div class="no-media"></div>
+                    </div>
+                    {% endif %}
 
-                <div class="media-body">
-                    <small>{{ noticia.data }}</small>
-                    <h4 class="media-heading"><a href="{{ app.request.basePath ~ noticia.uri }}">{{ noticia.titulo }}</a></h4>
-                    <p>{{ noticia.sinopse }}</p>
-                </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ noticia.titulo }}</h4>
+                        <p>{{ noticia.sinopse }}</p>
+                    </div>
+                </a>
             </div>
+
         {% endfor %}
         </div>
 

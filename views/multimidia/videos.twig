@@ -2,8 +2,8 @@
 
 <div id="videos">
 {% for video in pagina.multimidia.videos %}
-    <div class="video-wrapper margin-bottom">
-    {{ video.code|resize(300, true)|raw }}
+    <div class="embed-responsive embed-responsive-16by9 margin-bottom">
+    {{ video.code|raw }}
     </div>
 {% endfor %}
 </div>
