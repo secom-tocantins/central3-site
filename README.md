@@ -2,12 +2,10 @@
 
 #Instalação
 
-### Clone o projeto
-    git clone https://github.com/secom-tocantins/central3-silex-project.git
-    cd central3-silex-project
-
-### Instale as dependencias
-    ./console setup
+### Crie o projeto
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar create-project secom-tocantins/central3-silex-project -s dev
 
 ### Inicie o servidor
+    cd central3-silex-project
     ./console server
