@@ -11,4 +11,21 @@ function server
     php -S 0.0.0.0:8000 -t public/
 }
 
+function init
+{
+    docker pull ubuntu:16.04
+    build
+}
+
+function build
+{
+    docker build -t test .
+    run
+}
+
+function run
+{
+    docker run -p 8080:80 -v $(pwd):/var/www -ti test
+}
+
 $1
