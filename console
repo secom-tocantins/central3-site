@@ -19,13 +19,13 @@ function init
 
 function build
 {
-    docker build -t test .
+    docker build -t websecom-silex .
     run
 }
 
 function run
 {
-    docker run -p 8080:80 -v $(pwd):/var/www -ti test
+    docker run -p 8000:80 -v $(pwd):/var/www -ti websecom-silex
 }
 
 $1
