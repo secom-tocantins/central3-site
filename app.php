@@ -20,7 +20,7 @@ $app->before(function() use ($app) {
     $site = $app['client']->query('site.info')[0];
     $title = array($site->nome);
     $app['twig']->addGlobal('title', $title);
-    $app['twig']->addGlobal('menu', $app['client']->query('pagina.listar'));
+    $app['twig']->addGlobal('menu', $app['client']->query('pagina.mapa'));
 });
 
 /* Home */

@@ -2,7 +2,7 @@
 
 <div id="fotos" class="list-unstyled col-xs-5 pull-right">
 {% for foto in pagina.multimidia.fotos %}
-    <a class="img-wrapper" data-gallery href="{{ foto.url|resize(1000) }}" title="{{ foto.legenda }} - {{ foto.autor }}">
+    <a class="thumbnail img-wrapper" data-gallery href="{{ foto.url|resize(1000) }}" title="{{ foto.legenda }} - {{ foto.autor }}">
         {{ foto.code|resize(300)|raw }}
     </a>
 {% endfor %}
