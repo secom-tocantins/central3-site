@@ -1,13 +1,13 @@
 {
     "packages": {
-        "name": "secom-tocantins/central3-silex-project",
+        "name": "secom-tocantins/central3-site",
         "version": "1.0.0",
         "dist": {
-            "url": "https://github.com/secom-tocantins/central3-silex-project/zipball/master",
+            "url": "https://github.com/secom-tocantins/central3-site/zipball/master",
             "type": "zip"
         },
         "source": {
-            "url": "https://github.com/secom-tocantins/central3-silex-project",
+            "url": "https://github.com/secom-tocantins/central3-site",
             "type": "git",
             "reference": ""
         }
