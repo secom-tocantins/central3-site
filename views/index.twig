@@ -4,52 +4,37 @@
 
 <div class="col-sm-9 col-xs-12">
 
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            {% for noticia in destaques %}
-            <li data-target="#carousel" data-slide-to="{{ loop.index0 }}" class="{{ (loop.index == 1)? 'active' : '' }}"></li>
-            {% endfor %}
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            {% for noticia in destaques %}
-            <div class="item {{ (loop.index == 1)? 'active' : '' }}">
-                {{ noticia.thumb.code|resize(700,420)|raw }}
-                <div class="carousel-caption">
-                    <a href="{{ app.request.baseUrl ~ noticia.uri }}">{{ noticia.titulo }}</a>
+    <div class="white-bg media">
+        {% for noticia in destaques %}
+            <a href="{{ app.request.baseUrl ~ noticia.uri }}">
+                <div class="media-left">
+                        {{ noticia.thumb.code|resize(280,200)|raw }}
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-    <div class="row margin-bottom margin-top">
-        {% for noticia in destaques2 %}
-        <div class="col-xs-6">
-                <div class="img-wrapper margin-bottom">
-                    {{ noticia.thumb.code|resize(260,150)|raw }}
+                <div class="media-body padding">
+                    <h3 class="media-heading">{{ noticia.titulo }}</h3>
+                    <p>{{ noticia.sinopse }}</p>
                 </div>
-
-                <a href="{{ app.request.baseUrl ~ noticia.uri }}"><h4 class="margin-top-0">{{ noticia.titulo }}</h4></a>
-                <p>{{ noticia.sinopse }}</p>
-        </div>
+            </a>
         {% endfor %}
     </div>
 
-    <div>
+    <div class="white-block margin-top">
         {% for noticia in noticias %}
-        <div>
-            <a href="{{ app.request.baseUrl ~ noticia.uri }}"><h4>{{ noticia.titulo }}</h4></a>
-            <p>{{ noticia.sinopse }}</p>
-        </div>
+            <div class="margin-bottom">
+            <a href="{{ app.request.baseUrl ~ noticia.uri }}">
+                <div class="media">
+                    {% if noticia.thumb %}
+                        <div class="media-left">
+                            {{ noticia.thumb.code|resize(130,90)|raw }}
+                        </div>
+                    {% endif %}
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ noticia.titulo }}</h4>
+                        <p>{{ noticia.sinopse }}</p>
+                    </div>
+                </div>
+            </a>
+            </div>
         {% endfor %}
     </div>
 

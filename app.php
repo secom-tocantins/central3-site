@@ -26,12 +26,10 @@ $app->before(function() use ($app) {
 /* Home */
 $app->get('/', function (Silex\Application $app) {
     $banners = $app['client']->query('banner.listar','area=75407');
-    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=3');
+    $destaques = $app['client']->query('noticia.listar','destaque=s&temfoto=s&thumb=s&limite=1');
     $ids = $destaques->getHead()->ids;
-    $destaques2 = $app['client']->query('noticia.listar',"destaque=s&temfoto=s&thumb=s&limite=2&negar={$ids}");
-    $ids = ',' . $destaques2->getHead()->ids;
-    $noticias = $app['client']->query('noticia.listar',"limite=5&negar={$ids}");
-    return $app['twig']->render('index.twig', array('banners'=>$banners,'destaques'=>$destaques, 'destaques2' => $destaques2, 'noticias' => $noticias));
+    $noticias = $app['client']->query('noticia.listar',"thumb=s&limite=5&negar={$ids}");
+    return $app['twig']->render('index.twig', array('banners'=>$banners,'destaques'=>$destaques, 'noticias' => $noticias));
 })->bind('index');
 
 /* Listar notícias */

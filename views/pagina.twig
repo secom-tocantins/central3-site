@@ -2,22 +2,28 @@
 
 {% block content %}
 
-<article class="col-sm-12">
+<div  class="col-sm-12">
 
-    <h1 class="margin-top-0">{{ pagina.titulo|e }}</h1>
+    <article class="white-block">
+        {% if pagina.pai %}
+            <a href="{{ app.request.baseUrl ~ pagina.pai.uri }}"><h4 class="margin-top-0">{{ pagina.pai.titulo|e }}</h4></a>
+        {% endif %}
 
-    {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
+        <h1 class="margin-top-0">{{ pagina.titulo|e }}</h1>
 
-    <div>
-        {{ pagina.conteudo|raw }}
-    </div>
+        {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
+        {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
+        {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
 
-    {% include "multimidia/filhos.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/links.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+        <div>
+            {{ pagina.conteudo|raw }}
+        </div>
 
-</article>
+        {% include "multimidia/filhos.twig" with { 'pagina':pagina } %}
+        {% include "multimidia/links.twig" with { 'pagina':pagina } %}
+        {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+    </article>
+
+</div>
 
 {% endblock %}

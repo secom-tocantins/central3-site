@@ -3,25 +3,25 @@
 {% block content %}
 
 <div class="col-sm-12">
+    <div class="white-block">
+        <h1 class="margin-top-0">Galerias</h1>
 
-    <h1 class="margin-top-0">Galerias</h1>
-
-    {% if galerias %}
-        {% for galeria in galerias %}
-        <div class="media margin-bottom">
-            <div class="media-left">
-                {{ galeria.fotos[0].code|resize(100,60)|raw }}
+        {% if galerias %}
+            {% for galeria in galerias %}
+            <div class="media margin-bottom">
+                <div class="media-left">
+                    {{ galeria.fotos[0].code|resize(150,100)|raw }}
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ app.request.basePath ~ galeria.uri }}">{{ galeria.titulo }}</a></h4>
+                    <p>{{ galeria.descricao }}</p>
+                </div>
             </div>
-            <div class="media-body">
-                <h4 class="media-heading"><a href="{{ app.request.basePath ~ galeria.uri }}">{{ galeria.titulo }}</a></h4>
-                <p>{{ galeria.descricao }}</p>
-            </div>
-        </div>
-        {% endfor %}
-    {% else %}
-        <p>Nenhuma galeria cadastrada.</p>
-    {% endif %}
-
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma galeria cadastrada.</p>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}

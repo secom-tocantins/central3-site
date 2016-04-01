@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+    //set a minimum viewport size
+    if ($(window).width() < 600) { $('meta[name=viewport]').attr('content','width=600'); }
+
     $('#conteudo').scroll4ever({
         trigger:'a#more',
         container:'#noticias > div',

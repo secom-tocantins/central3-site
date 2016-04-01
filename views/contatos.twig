@@ -3,18 +3,19 @@
 {% block content %}
 
 <div class="col-sm-12">
-    <h1 class="margin-top-0">Contatos</h1>
-    {% if contatos %}
-        {% for contato in contatos %}
-            <p><strong>{{ contato.cargo }}</strong><br />
-            {{ contato.nome }}<br />
-            {{ contato.telefone }}<br />
-            {{ contato.email }}
-            </p>
-        {% endfor %}
-    {% else %}
-    <p>Nenhum contato cadastrado.</p>
-{% endif %}
-
+    <div class="white-block">
+        <h1 class="margin-top-0">Contatos</h1>
+        {% if contatos %}
+            {% for contato in contatos %}
+                <p><strong>{{ contato.cargo }}</strong><br />
+                {{ contato.nome }}<br />
+                {{ contato.telefone }}<br />
+                {{ contato.email }}
+                </p>
+            {% endfor %}
+        {% else %}
+        <p>Nenhum contato cadastrado.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

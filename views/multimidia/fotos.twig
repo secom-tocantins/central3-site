@@ -1,9 +1,9 @@
 {% if (pagina.multimidia.fotos) %}
 
-<div id="fotos" class="list-unstyled col-xs-5 pull-right">
+<div id="fotos" class="list-unstyled col-xs-6 pull-right">
 {% for foto in pagina.multimidia.fotos %}
     <a class="thumbnail img-wrapper" data-gallery href="{{ foto.url|resize(1000) }}" title="{{ foto.legenda }} - {{ foto.autor }}">
-        {{ foto.code|resize(300)|raw }}
+        {{ foto.code|resize(400)|raw }}
     </a>
 {% endfor %}
 </div>
