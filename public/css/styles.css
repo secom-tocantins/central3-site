@@ -1,4 +1,4 @@
-* { font-family: 'Roboto', sans-serif; }
+body { font-family: 'Roboto', sans-serif; }
 h1, h2, h3, h4, h5 { color:#245A98; margin:20px 0 }
 body { background: #EEEEE9; }
 
@@ -14,7 +14,7 @@ body { background: #EEEEE9; }
 #header-image { background:#2E5695; width: 100%; height:100px; margin-top:-5px; }
 
 .nav { padding: 0; background: white; margin-bottom: 20px; }
-.nav a { display: block; clear: both; color:#22538E; padding:10px 4px; font-size: 1.1em; border-bottom: 1px solid #E5E5E5; margin:0 10px; text-transform: uppercase; }
+.nav a { display: block; clear: both; color:#22538E; padding:10px 4px; font-size: 17px; border-bottom: 1px solid #E5E5E5; margin:0 10px; text-transform: uppercase; }
 .nav a:hover { background:#27577F; color:white; font-weight: bold; text-decoration: none; margin:0; padding:10px 14px; }
 .nav a.active { background:#5476AA; color:white; font-weight: bold; margin:0; padding:10px 14px; }
 .nav a:last-child { border-bottom: none; }
