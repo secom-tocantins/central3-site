@@ -2,13 +2,14 @@
 
 {% block content %}
 
-    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.css' rel='stylesheet'/>
-    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.print.css' rel='stylesheet' media='print'/>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.css' rel='stylesheet'/>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.print.css' rel='stylesheet'
+          media='print'/>
 
     <div class="col-sm-12">
         <div class="white-block">
             <h1 class="margin-top-0">Calendário de Eventos</h1>
-            <input type="hidden" value="{{ json }}" id="eventosJson" />
+            <input type="hidden" value="{{ json }}" id="eventosJson"/>
             <div id="eventos">
                 <div id='calendar'>
                 </div>
@@ -20,15 +21,16 @@
 
 {% block script %}
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/gcal.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/lang/pt-br.js"></script>
-<script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/gcal.js"></script>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/lang/pt-br.js"></script>
+    <script>
         $(document).ready(function () {
             $('#calendar').fullCalendar({
                 timeFormat: '(:mm)',
-                timezone:'America/Araguaina',
+                timezone: 'America/Araguaina',
                 editable: false,
                 eventLimit: true,
                 header: {
@@ -36,7 +38,7 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                defaultDate:"{{ hodie }}",
+                defaultDate: "{{ hodie }}",
                 eventLimit: true, // allow "more" link when too many events
                 events: jQuery.parseJSON($("#eventosJson").val())
             });

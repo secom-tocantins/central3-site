@@ -113,7 +113,7 @@ $app->get('/eventos/', function (Silex\Application $app) {
     try {
         appendTitle($app, 'Calendário de Eventos');
         $eventos = $app['client']->query('evento.listar','thumb=s');
-        $json=Helper::eventosToJson($eventos,$app);
+        $json=Helper::eventosToJson($eventos);
         $hodie=date("Y-m-d");
         return $app['twig']->render('eventos.twig', array('eventos' => $eventos, 'json'=>$json, 'hodie'=>$hodie));
     } catch(ApiException $e) {
@@ -127,7 +127,7 @@ $app->get('/evento/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app)
         $evento =  $app['client']->byUri($app['request']->getPathInfo());
         appendTitle($app, 'Eventos');
         appendTitle($app, $evento->titulo);
-        $evento=Helper::normalizeEvento($evento,$app);
+        $evento=Helper::normalizeEvento($evento);
         return $app['twig']->render('evento.twig', array('pagina' => $evento));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
