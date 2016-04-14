@@ -24,14 +24,27 @@
                         <button type="button" class="glyphicon glyphicon-menu-hamburger navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                     </div>
 
-                    <nav class="nav navbar-collapse collapse" role="navigation">
+                    {% macro submenu(item) %}
+                        <span>
+                            <a class="" href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
+                            {% if item.filhos %}
+                                <nav>
+                                    {% for i in item.filhos %}
+                                        {{ _self.submenu(i) }}
+                                    {% endfor %}
+                                </nav>
+                            {% endif %}
+                        </span>
+                    {% endmacro %}
+
+                    <nav id="menu" class="navbar-collapse collapse" role="navigation">
                         <a class="" href="{{ app.request.baseUrl }}/">Início</a>
                         <a class="" href="{{ app.request.baseUrl }}/noticia/">Notícias</a>
                         <a class="" href="{{ app.request.baseUrl }}/galeria/">Galerias</a>
                         <a class="" href="{{ app.request.baseUrl }}/eventos/">Eventos</a>
                         <a class="" href="{{ app.request.baseUrl }}/contatos/">Contatos</a>
                         {% for item in menu %}
-                        <a class="" href="{{ app.request.baseUrl ~ item.uri }}">{{ item.titulo }}</a>
+                            {{ _self.submenu(item) }}
                         {% endfor %}
                     </nav>
                 </div>

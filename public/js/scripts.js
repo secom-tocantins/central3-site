@@ -13,5 +13,5 @@ $(document).ready(function() {
         complete: function(){}, // callback called when a new page load ends
     });
 
-    $('a[href="'+ window.location.pathname +'"]').addClass('active');
+    $('a[href="'+ window.location.pathname +'"]').addClass('active').parents('span').addClass('active');
 });
