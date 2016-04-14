@@ -3,7 +3,7 @@
 function setup
 {
     curl -sS https://getcomposer.org/installer | php
-    php composer.phar install --dev --prefer-dist
+    php composer.phar install --prefer-dist
 }
 
 function server
