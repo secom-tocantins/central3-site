@@ -1,43 +1,43 @@
 {% extends 'layout/default.twig' %}
 
 {% block content %}
-<div class="col-sm-12">
-    <article class="white-block">
+    <div class="col-sm-12">
+        <article class="white-block">
 
-    <h1 class="margin-top-0">{{ pagina.titulo }}</h1>
+            <h1 class="margin-top-0">{{ pagina.titulo }}</h1>
 
-    {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
-    {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
+            {% include "multimidia/videos.twig" with { 'pagina':pagina } %}
+            {% include "multimidia/audios.twig" with { 'pagina':pagina } %}
+            {% include "multimidia/fotos.twig" with { 'pagina':pagina } %}
 
-    <div id="mapa" class="map-wrapper"></div>
+            <div id="mapa" class="map-wrapper"></div>
 
-    <div>
-    <p>
-        {{ pagina.descricao|raw }}
-    </p>
+            <div>
+                <p>Data: {{ pagina.data.inicio|raw }} {% if pagina.data.fim %}- {{ pagina.data.fim|raw }}{% endif %} </p>
+                <p>Sobre o evento: {{ pagina.descricao|raw }}</p>
+                <p>{{ pagina.valor|raw }}</p>
+            </div>
+
+            {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
+
+        </article>
+
+        <div id="share">
+            <h4 class="title">Compartilhe este pagina</h4>
+            <span class='st_facebook_large' displayText='Facebook'></span>
+            <span class='st_twitter_large' displayText='Tweet'></span>
+            <span class='st_googleplus_large' displayText='Google +'></span>
+            <span class='st_pinterest_large' displayText='Pinterest'></span>
+            <span class='st_delicious_large' displayText='Delicious'></span>
+            <span class='st_email_large' displayText='Email'></span>
+        </div>
+
     </div>
-
-    {% include "multimidia/arquivos.twig" with { 'pagina':pagina } %}
-
-    </article>
-
-    <div id="share">
-        <h4 class="title">Compartilhe este pagina</h4>
-        <span class='st_facebook_large' displayText='Facebook'></span>
-        <span class='st_twitter_large' displayText='Tweet'></span>
-        <span class='st_googleplus_large' displayText='Google +'></span>
-        <span class='st_pinterest_large' displayText='Pinterest'></span>
-        <span class='st_delicious_large' displayText='Delicious'></span>
-        <span class='st_email_large' displayText='Email'></span>
-    </div>
-
-</div>
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript">
 
         var geocoder;
         var map;
@@ -63,8 +63,8 @@
             marker.setPosition(latlng);
         }
 
-    $(document).ready(function () {
-        initialize();
-    });
-</script>
+        $(document).ready(function () {
+            initialize();
+        });
+    </script>
 {% endblock %}
