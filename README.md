@@ -1,6 +1,4 @@
-#Central3 Client
-
-#Instalação
+# Central 3 Site
 
 ## Crie o projeto
     curl -sS https://getcomposer.org/installer | php
