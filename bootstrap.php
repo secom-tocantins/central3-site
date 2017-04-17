@@ -39,16 +39,6 @@ $app['twig']->addFilter('limitLetters', new Twig_Filter_Function(
 
 $app['twig']->addFilter('var_dump', new Twig_Filter_Function('var_dump'));
 
-/* Cache */
-$app['cache'] = $app->share(function() use ($app) {
-    if ($app['debug']) {
-        return null;
-    }
-    $mc = new \Memcached();
-    $mc->addServer('localhost', 11211);
-    return new \Secom\Cache\Memcached($mc);
-});
-
 $app['client'] = $app->share(function() use ($app) {
-    return new \Secom\Central3\Client('teste', $app['cache']);
+    return new \Secom\Central3\Client('teste');
 });
