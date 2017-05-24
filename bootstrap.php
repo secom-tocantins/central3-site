@@ -1,6 +1,33 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
+/* functions */
+function dd($v)
+{
+    die(var_dump($v));
+}
+
+function appendTitle($app, $newTitle)
+{
+    $title = $app['twig']->getGlobals()['title'];
+    array_unshift($title, $newTitle);
+    $app['twig']->addGlobal('title', $title);
+}
+
+function filterBanners($banners, $id_area)
+{
+    $banners_area = array();
+    foreach ($banners as $b)
+    {
+        if ($b->id_area == $id_area)
+        {
+            $banners_area[] = $b;
+        }
+    }
+    return $banners_area;
+}
+
+
 /* Silex */
 $app = new Silex\Application();
 $app['debug'] = !(getenv('APPLICATION_ENV') == 'production');
