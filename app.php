@@ -57,18 +57,6 @@ $app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app
     }
 })->bind('noticia');
 
-/* Busca */
-$app->get('/busca/', function (Silex\Application $app) {
-    try {
-        $busca = $app['request']->query->get('q');
-        appendTitle($app, 'Busca');
-        appendTitle($app, $busca);
-        return $app['twig']->render('busca.twig', compact('busca'));
-    } catch(ApiException $e) {
-        throw new NotFoundHttpException($e->getMessage(), $e, 404);
-    }
-})->bind('busca');
-
 /* Listar galerias */
 $app->get('/galeria/', function (Silex\Application $app) {
     try {
