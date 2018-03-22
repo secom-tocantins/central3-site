@@ -33,7 +33,7 @@
             </div>
 
             {% if proximaPagina > 0 %}
-            <a id="more" class="btn btn-primary" href="{{ app.request.uri|split('?')[0] ~ "?pagina=" ~ proximaPagina }}"><span class="glyphicon glyphicon-refresh"></span> Ver mais notícias</a>
+            <a id="more" class="btn btn-primary" href="{{ app.request.uri|replace({'http:':''})|split('?')[0] ~ "?pagina=" ~ proximaPagina }}"><span class="glyphicon glyphicon-refresh"></span> Ver mais notícias</a>
             {% endif %}
         </div>
     </div>
