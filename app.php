@@ -48,9 +48,9 @@ $app->get('/noticia/{ano}/{mes}/{dia}/', $listar)->bind('noticias.ano.mes.dia');
 /* Visualizar notícia */
 $app->get('/noticia/{ano}/{mes}/{dia}/{slug}/', function (Silex\Application $app) {
     try {
-        $noticia = $app['client']->byUri($app['request']->getPathInfo());
+        $pagina = $app['client']->byUri($app['request']->getPathInfo());
         appendTitle($app, 'Notícias');
-        appendTitle($app, $noticia->titulo);
+        appendTitle($app, $pagina->titulo);
         return $app['twig']->render('noticia.twig', compact('pagina'));
     } catch(ApiException $e) {
         throw new NotFoundHttpException($e->getMessage(), $e, 404);
